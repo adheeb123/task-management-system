@@ -1,0 +1,44 @@
+<!-- login.component.html -->
+<div style="margin-top: 10%;" class="login-container d-flex align-items-center justify-content-center">
+  <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
+    <div class="card-body p-4 ">
+      <h3 class="card-title text-center mb-4">Task Manager Login</h3>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- Username -->
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input type="text" formControlName="username" class="form-control"
+            [class.is-invalid]="loginForm.get('username')?.touched && loginForm.get('username')?.invalid"
+            placeholder="Enter username">
+          <div class="invalid-feedback">Username is required.</div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" formControlName="password" class="form-control"
+            [class.is-invalid]="loginForm.get('password')?.touched && loginForm.get('password')?.invalid"
+            placeholder="Enter password">
+          <div class="invalid-feedback">Password must be at least 5 characters.</div>
+        </div>
+
+        <!-- Error Alert -->
+        <div *ngIf="errorMessage" class="alert alert-danger py-2 small">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 mt-2" [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-1"></span>
+          Login
+        </button>
+      </form>
+
+      <p class="text-muted text-center mt-4 mb-0 small">
+        Static Demo: <strong>admin / admin123</strong>
+      </p>
+    </div>
+  </div>
+</div>

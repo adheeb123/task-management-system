@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { TaskStatus } from 'src/app/core/models/task.model';
 
 @Component({
   selector: 'app-status-badge',
@@ -8,5 +9,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 })
 export class StatusBadgeComponent {
+  @Input() status!: TaskStatus;
 
 }

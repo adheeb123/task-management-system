@@ -24,80 +24,48 @@
   ],
   "tasks": [
     {
-      "id": 1,
-      "title": "Build login page",
-      "description": "Create responsive login page with validation",
+      "title": "Front End Development",
+      "description": "Front End Development Description Test",
       "assignedTo": 1,
-      "priority": "High",
+      "priority": "Low",
       "status": "In Progress",
-      "startDate": "2026-04-20",
-      "dueDate": "2026-05-02",
-      "createdDate": "2026-04-18"
+      "startDate": "2026-05-12",
+      "dueDate": "2026-05-14",
+      "createdDate": "2026-04-30T19:54:52.779Z",
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "Write API test cases",
-      "description": "Prepare regression test cases for auth module",
+      "title": "BackEnd Developent Task",
+      "description": "BackEnd Developent Task Description",
       "assignedTo": 2,
-      "priority": "Medium",
-      "status": "Pending",
-      "startDate": "2026-04-25",
-      "dueDate": "2026-05-05",
-      "createdDate": "2026-04-22"
-    },
-    {
-      "title": "Optimize dashboard Json API",
-      "description": "Improve response time and caching",
-      "assignedTo": 3,
       "priority": "High",
-      "status": "Completed",
-      "startDate": "2026-04-10",
-      "dueDate": "2026-04-28",
-      "id": 3,
-      "createdDate": "2026-04-29"
+      "status": "In Progress",
+      "startDate": "2026-05-02",
+      "dueDate": "2026-05-13",
+      "createdDate": "2026-04-30T19:57:59.601Z",
+      "id": 2
     },
     {
-      "title": "main task",
-      "description": "main description",
+      "title": "Testing Front end and Ui",
+      "description": "Testing Front end and Ui Description",
       "assignedTo": 3,
-      "priority": "Medium",
+      "priority": "Low",
       "status": "In Progress",
-      "startDate": "2026-04-17",
-      "dueDate": "2026-04-17",
-      "id": 1777431276938,
-      "createdDate": "2026-04-29"
+      "startDate": "2026-05-22",
+      "dueDate": "2026-05-30",
+      "createdDate": "2026-04-30T19:58:51.858Z",
+      "id": 3
+    },
+    {
+      "title": "Front end Api integeration",
+      "description": "Front end Api integeration",
+      "assignedTo": 3,
+      "priority": "Low",
+      "status": "In Progress",
+      "startDate": "2026-05-01",
+      "dueDate": "2026-05-09",
+      "id": 4
     }
   ],
-  "activities": [
-    {
-      "id": 1,
-      "taskId": 1,
-      "message": "Task created",
-      "timestamp": "2026-04-18T10:00:00"
-    },
-    {
-      "id": 2,
-      "taskId": 1,
-      "message": "Assigned to Arun Kumar",
-      "timestamp": "2026-04-18T10:15:00"
-    },
-    {
-      "id": 3,
-      "taskId": 1,
-      "message": "Status changed to In Progress",
-      "timestamp": "2026-04-21T09:30:00"
-    },
-    {
-      "id": 4,
-      "taskId": 2,
-      "message": "Task created",
-      "timestamp": "2026-04-22T11:00:00"
-    },
-    {
-      "id": 5,
-      "taskId": 3,
-      "message": "Task completed",
-      "timestamp": "2026-04-28T17:00:00"
-    }
-  ]
+  "activities": []
 }

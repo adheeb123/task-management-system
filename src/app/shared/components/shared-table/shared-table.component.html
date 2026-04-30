@@ -1,0 +1,39 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th *ngFor="let col of columns" (click)="col.sortable && onSort(col.key)" [class.cursor-pointer]="col.sortable">
+          {{ col.label }}
+          <!-- Add a small sort icon indicator if you like -->
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data" (click)="onRowClick(row)" class="cursor-pointer">
+        <td *ngFor="let col of columns">
+
+          <ng-container [ngSwitch]="col.key">
+
+            <!-- Case 1: Status Badge -->
+            <app-status-badge *ngSwitchCase="'status'" [status]="row[col.key]"></app-status-badge>
+
+            <!-- Case 2: Action Buttons -->
+            <div *ngSwitchCase="'actions'" class="d-flex gap-2">
+              <button class="btn btn-sm btn-outline-primary" (click)="onEditClick($event, row)">
+                Edit
+              </button>
+              <button class="btn btn-sm btn-outline-danger" (click)="onDeleteClick($event, row)">
+                Delete
+              </button>
+            </div>
+
+            <!-- Case 3: Default Text -->
+            <span *ngSwitchDefault>{{ row[col.key] || '-' }}</span>
+
+          </ng-container>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

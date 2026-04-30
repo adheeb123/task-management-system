@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
+import { ToastsContainer } from "./core/ngb-toaster/toast-container.component";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,8 +17,9 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastsContainer
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

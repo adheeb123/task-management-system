@@ -1,0 +1,8 @@
+<span class="badge"
+  [ngClass]="{
+    'bg-warning text-dark': status === 'Pending',
+    'bg-info text-dark': status === 'In Progress',
+    'bg-success': status === 'Completed'
+  }">
+  {{ status }}
+</span>

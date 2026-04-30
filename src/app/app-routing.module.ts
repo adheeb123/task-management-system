@@ -1,20 +1,28 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './core/auth/login-components/login.compoenent';
+import { authGuard } from './core/auth/auth.gaurd';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tasks',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
     path: 'tasks',
+    // CRITICAL: Protect the module at the root level
+    canActivate: [authGuard],
     loadChildren: () =>
       import('./features/tasks/tasks.module').then(m => m.TasksModule)
   },
   {
     path: '**',
-    redirectTo: 'tasks'
+    redirectTo: 'login' // Change this from 'tasks' to 'login' for better security
   }
 ];
 
@@ -24,4 +32,4 @@ const routes: Routes = [
   })],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

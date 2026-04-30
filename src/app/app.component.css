@@ -1,0 +1,24 @@
+/* 1. Page Background (Applied to the outer container) */
+.container-fluid, .page-wrapper {
+  background-color: #f8f9fa; /* Bootstrap's light gray */
+  min-height: 100vh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* 2. Card Styling */
+.card {
+  background-color: #ffffff !important; /* Force pure white */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Very faint border */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 2px;
+
+  
+}
+
+/* 3. Card Header Styling */
+.card-header {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #f1f1f1;
+}
