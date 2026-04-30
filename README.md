@@ -1,27 +1,34 @@
-# TaskManagementSystem
+# 🚀 Task Management System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+A modern, responsive Task Management application built with **Angular**. This system allows users to efficiently create, track, and manage daily tasks with a focus on clean UI/UX and reactive state management.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🛠 Tech Stack
 
-## Code scaffolding
+*   **Frontend:** Angular (Latest)
+*   **Styling:** Bootstrap 5 / NG Bootstrap
+*   **State Management:** RxJS (Observables & Subjects)
+*   **Forms:** Reactive Forms / ngx-formly
+*   **Icons:** Bootstrap Icons
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## ✨ Key Features
 
-## Build
+*   **Task Dashboard:** A bird's-eye view of all pending and completed tasks.
+*   **Advanced Detail View:** Professional 8/4 grid layout for task descriptions and activity history.
+*   **Priority Labeling:** Visual indicators for High, Medium, and Low priority tasks.
+*   **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop views using Bootstrap.
+*   **Toast Notifications:** Real-time feedback for actions like deleting or updating tasks.
+*   **Status Tracking:** Dynamic badges to track progress.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🚀 Getting Started
 
-## Running unit tests
+### Prerequisites
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Installation
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. **Clone the repository**
+   ```bash
+   git clone [https://github.com/adheeb123/task-management-system.git](https://github.com/adheeb123/task-management-system.git)
+   cd task-management-system
