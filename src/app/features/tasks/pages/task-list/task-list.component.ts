@@ -23,9 +23,9 @@ export class TaskListComponent implements OnInit {
     { key: 'assignedUserName', label: 'Assigned To', sortable: true },
     { key: 'priority', label: 'Priority', sortable: true },
     { key: 'status', label: 'Status', sortable: true },
+    { key: 'startDate', label: 'Start Date', sortable: true },
     { key: 'dueDate', label: 'Due Date', sortable: true },
-    { key: 'createdDate', label: 'Created Date', sortable: true },
-    { key: 'actions', label: 'Actions', sortable: false }
+    { key: 'actions', label: 'Actions' }
   ];
 
   vm$ = this.taskService.viewTasks$;
