@@ -4,46 +4,69 @@ A modern, responsive Task Management application built with **Angular**. This sy
 
 ---
 
+## 🎥 Project Demo
+
+[▶️ Watch Task Management System Demo](https://github.com/adheeb123/task-management-system/blob/task-managment/TaskManagementSystem.mp4)
+
+---
+
 ## 🛠 Tech Stack
 
-*   **Frontend:** Angular (Latest)
-*   **Styling:** Bootstrap 5 / NG Bootstrap
-*   **State Management:** RxJS (Observables & Subjects)
-*   **Forms:** Reactive Forms / ngx-formly
-*   **Icons:** Bootstrap Icons
+* **Frontend:** Angular (16)  
+* **Styling:** NG Bootstrap (15)
+* **State Management:** RxJS (Observables & Subjects)  
+* **Forms:** Reactive Forms / ngx-formly  
+
+---
 
 ## ✨ Key Features
 
-*   **Task Dashboard:** A bird's-eye view of all pending and completed tasks.
-*   **Advanced Detail View:** Professional 8/4 grid layout for task descriptions and activity history.
-*   **Priority Labeling:** Visual indicators for High, Medium, and Low priority tasks.
-*   **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop views using Bootstrap.
-*   **Toast Notifications:** Real-time feedback for actions like deleting or updating tasks.
-*   **Status Tracking:** Dynamic badges to track progress.
+* **Task Dashboard:** A bird's-eye view of all pending and completed tasks.  
+* **Responsive Design:** Fully optimized for Mobile, Tablet, and Desktop views using Bootstrap.  
+* **Toast Notifications:** Real-time feedback for actions like deleting or updating tasks.  
+* **Status Tracking:** Dynamic badges to track progress.  
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+# 🚀 Getting Started
+
+## Prerequisites
+
+Before running this project, make sure you are using **Node.js v20**.
+
+### Install NVM (Node Version Manager)
+Download and install NVM from:  
+https://github.com/coreybutler/nvm-windows
+
+### Install and Use Node.js v20
+```bash
+nvm install 20
+nvm use 20
+node -v
 
 
-### Installation
+To run the application successfully, you must start both the Angular Frontend and the Mock Server Backend at the same time.
 
-1. **Clone the repository**
-   ```bash
-   git clone [https://github.com/adheeb123/task-management-system.git](https://github.com/adheeb123/task-management-system.git)
-   cd task-management-system
+1️⃣ Start the Angular Frontend
 
-🚀 How to Run the Project
-To see the application in action with full data functionality, you need to have both the Frontend and the Mock Backend running at the same time.
+Run the Angular development server:
 
-2. Start the Backend (API)
-The project uses a JSON Server to manage task data. Run the following command to start the server:
- 
- npm run server
+ng s
 
-(Note: This watches your db.json file and provides the data to the UI on port 3000.)
+Frontend URL:
+http://localhost:4200/
 
-2. Start the Frontend (UI)
-Open a new terminal window and run the standard Angular development command:
+2️⃣ Start the Mock Server (JSON Server)
 
-  ng serve
+Open a new terminal in the project folder and run:
+
+npx json-server --watch db.json --port 3000
+
+This command will:
+
+Run the mock backend server
+Watch your db.json file for changes
+Start the API on Port 3000
+
+Mock Server URL:
+http://localhost:3000/
