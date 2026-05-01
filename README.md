@@ -32,3 +32,18 @@ A modern, responsive Task Management application built with **Angular**. This sy
    ```bash
    git clone [https://github.com/adheeb123/task-management-system.git](https://github.com/adheeb123/task-management-system.git)
    cd task-management-system
+
+🚀 How to Run the Project
+To see the application in action with full data functionality, you need to have both the Frontend and the Mock Backend running at the same time.
+
+2. Start the Backend (API)
+The project uses a JSON Server to manage task data. Run the following command to start the server:
+ 
+ npm run server
+
+(Note: This watches your db.json file and provides the data to the UI on port 3000.)
+
+2. Start the Frontend (UI)
+Open a new terminal window and run the standard Angular development command:
+
+  ng serve
