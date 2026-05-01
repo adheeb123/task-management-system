@@ -1,9 +1,5 @@
 # 🚀 Task Management System
 
-A modern, responsive Task Management application built with **Angular**. This system allows users to efficiently create, track, and manage daily tasks with a focus on clean UI/UX and reactive state management.
-
----
-
 ## 🎥 Project Demo
 
 [▶️ Watch Task Management System Demo](https://github.com/adheeb123/task-management-system/blob/task-managment/TaskManagementSystem.mp4)
@@ -43,6 +39,8 @@ https://github.com/coreybutler/nvm-windows
 nvm install 20
 nvm use 20
 node -v
+
+
 
 
 To run the application successfully, you must start both the Angular Frontend and the Mock Server Backend at the same time.
