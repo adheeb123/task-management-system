@@ -9,21 +9,43 @@
 
   <div class="row g-2 mb-3">
     <div class="col-md-4">
-      <input type="text" class="form-control" placeholder="Search by title"
-        (input)="onSearch($any($event.target).value)" />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        (input)="onSearch($any($event.target).value)"
+      />
     </div>
 
     <div class="col-md-4">
-      <select class="form-select" (change)="onAssigneeFilter($any($event.target).value)">
+      <select
+        class="form-select"
+        (change)="onAssigneeFilter($any($event.target).value)"
+      >
         <option value="">All Assignees</option>
-        <option *ngFor="let user of (users$ | async)" [value]="user.id">
+        <option *ngFor="let user of users$ | async" [value]="user.id">
           {{ user.name }}
         </option>
       </select>
     </div>
 
     <div class="col-md-4">
-      <select class="form-select" (change)="onStatusFilter($any($event.target).value)">
+      <select
+        class="form-select"
+        (change)="onCreatedByFilter($any($event.target).value)"
+      >
+        <option value="">CreatedBy</option>
+        <option *ngFor="let admin of admins$ | async" [value]="admin.id">
+          {{ admin.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <select
+        class="form-select"
+        (change)="onStatusFilter($any($event.target).value)"
+      >
         <option value="">All Status</option>
         <option value="Pending">Pending</option>
         <option value="In Progress">In Progress</option>
@@ -33,15 +55,26 @@
   </div>
 
   <ng-container *ngIf="vm$ | async as vm">
-    <app-shared-table [columns]="columns" [data]="vm.data" (sort)="onSort($event)"
-      (rowClick)="navigateToDetails($event.id)" (edit)="handleEdit($event)" (delete)="handleDelete($event)">
+    <app-shared-table
+      [columns]="columns"
+      [data]="vm.data"
+      (sort)="onSort($event)"
+      (rowClick)="navigateToDetails($event.id)"
+      (edit)="handleEdit($event)"
+      (delete)="handleDelete($event)"
+    >
     </app-shared-table>
     <div class="mt-3" *ngIf="vm.data.length === 0">
       <div class="alert alert-warning mb-0">No tasks found.</div>
     </div>
 
-    <ngb-pagination class="d-flex justify-content-end mt-3" [collectionSize]="vm.total" [page]="vm.page"
-      [pageSize]="vm.pageSize" (pageChange)="onPageChange($event)">
+    <ngb-pagination
+      class="d-flex justify-content-end mt-3"
+      [collectionSize]="vm.total"
+      [page]="vm.page"
+      [pageSize]="vm.pageSize"
+      (pageChange)="onPageChange($event)"
+    >
     </ngb-pagination>
   </ng-container>
 </div>

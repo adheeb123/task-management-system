@@ -39,6 +39,16 @@
             </app-form-field>
           </div>
 
+            <!-- admin -->
+          <div class="col-md-6">
+            <app-form-field label="createdBy" [control]="taskForm.get('createdBy')">
+              <select formControlName="createdBy" class="form-select">
+                <option [ngValue]="null">Select User</option>
+                <option *ngFor="let admin of admins" [value]="admin.id">{{ admin.name }}</option>
+              </select>
+            </app-form-field>
+          </div>
+
           <!-- Priority -->
           <div class="col-md-3">
             <app-form-field label="Priority" [control]="taskForm.get('priority')">

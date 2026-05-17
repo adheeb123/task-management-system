@@ -12,6 +12,7 @@ import { Task, TaskStatus } from '../../../core/models/task.model';
 import { User } from '../../../core/models/user.model';
 import { Activity } from '../../../core/models/activity.model';
 import { environment } from 'environments/environment';
+import { Admin } from 'src/app/core/models/admin.model';
 
 type SortDirection = 'asc' | 'desc';
 
@@ -26,9 +27,13 @@ export class TaskService {
   // using subject for managing tasks
   private tasksSubject = new BehaviorSubject<Task[]>([]);
   private usersSubject = new BehaviorSubject<User[]>([]);
+  private adminsSubject = new BehaviorSubject<Admin[]>([]);
+
   private selectedTaskSubject = new BehaviorSubject<Task | null>(null);
   private searchSubject = new BehaviorSubject<string>('');
   private assigneeFilterSubject = new BehaviorSubject<number | null>(null);
+  private onCreatedByFilterSubject = new BehaviorSubject<number | null>(null);
+  private AdminFilterSubject = new BehaviorSubject<number | null>(null);
   private statusFilterSubject = new BehaviorSubject<TaskStatus | ''>('');
   private sortFieldSubject = new BehaviorSubject<string>('createdDate');
   private sortDirectionSubject = new BehaviorSubject<SortDirection>('asc');
@@ -40,6 +45,8 @@ export class TaskService {
   selectedSubject$ = this.selectedTaskSubject.asObservable();
   search$ = this.searchSubject.asObservable();
   assigneeFilter$ = this.assigneeFilterSubject.asObservable();
+  onCreatedByFilter$ = this.onCreatedByFilterSubject.asObservable();
+  admins$ = this.adminsSubject.asObservable();
   statusFilter$ = this.statusFilterSubject.asObservable();
   sortField$ = this.sortFieldSubject.asObservable();
   sortDirection$ = this.sortDirectionSubject.asObservable();
@@ -49,8 +56,10 @@ export class TaskService {
   viewTasks$ = combineLatest([
     this.tasks$,
     this.users$,
+    this.admins$,
     this.search$,
     this.assigneeFilter$,
+    this.onCreatedByFilter$,
     this.statusFilter$,
     this.sortField$,
     this.sortDirection$,
@@ -61,8 +70,10 @@ export class TaskService {
       ([
         tasks,
         users,
+        admins,
         search,
         assigneeId,
+        adminId,
         status,
         sortField,
         sortDirection,
@@ -71,6 +82,7 @@ export class TaskService {
       ]) => {
         let filtered = [...tasks];
 
+        // SEARCH
         if (search.trim()) {
           const s = search.toLowerCase();
           filtered = filtered.filter((task) =>
@@ -78,14 +90,22 @@ export class TaskService {
           );
         }
 
+        // ASSIGNEE FILTER
         if (assigneeId !== null) {
           filtered = filtered.filter((task) => task.assignedTo === assigneeId);
+        };
+                // Admin FILTER
+
+        if (adminId !== null) {
+          filtered = filtered.filter((task) => task.createdBy === adminId);
         }
 
+        // STATUS FILTER
         if (status) {
           filtered = filtered.filter((task) => task.status === status);
         }
 
+        // SORTING
         filtered = filtered.sort((a: any, b: any) => {
           const aValue = a[sortField];
           const bValue = b[sortField];
@@ -95,6 +115,7 @@ export class TaskService {
           return 0;
         });
 
+        // PAGINATION
         const total = filtered.length;
         const start = (page - 1) * pageSize;
         const paged = filtered.slice(start, start + pageSize);
@@ -102,9 +123,16 @@ export class TaskService {
         return {
           data: paged.map((task) => ({
             ...task,
+
+            // USER NAME
             assignedUserName:
               users.find((u) => u.id === task.assignedTo)?.name || '-',
+
+            // ADMIN NAME (CREATED BY)
+            createdByName:
+              admins.find((a) => a.id === task.createdBy)?.name || 'aaaa-',
           })),
+
           total,
           page,
           pageSize,
@@ -113,17 +141,18 @@ export class TaskService {
       },
     ),
   );
-
   constructor(private http: HttpClient) {}
 
   loadInitialData(): Observable<any> {
     return forkJoin({
       tasks: this.http.get<Task[]>(`${this.apiUrl}/tasks`),
       users: this.http.get<User[]>(`${this.apiUrl}/users`),
+      admins: this.http.get<Admin[]>(`${this.apiUrl}/admins`),
     }).pipe(
-      tap(({ tasks, users }) => {
+      tap(({ tasks, users, admins }) => {
         this.tasksSubject.next(tasks);
         this.usersSubject.next(users);
+        this.adminsSubject.next(admins); // ✅ FIXED
       }),
     );
   }
@@ -148,11 +177,15 @@ export class TaskService {
     this.pageSubject.next(1);
   }
 
+  setAdminFilter(value: number | null) {
+    this.AdminFilterSubject.next(value);
+    this.pageSubject.next(1);
+  }
+
   setStatusFilter(value: TaskStatus | '') {
     this.statusFilterSubject.next(value);
     this.pageSubject.next(1);
   }
-
   setSort(field: string) {
     const currentField = this.sortFieldSubject.value;
     const currentDirection = this.sortDirectionSubject.value;
@@ -178,6 +211,11 @@ export class TaskService {
       map((users) => users.find((user) => user.id === id)),
     );
   }
+  getAdminById(id: number): Observable<Admin | undefined> {
+    return this.admins$.pipe(
+      map((admins) => admins.find((admin) => admin.id === id)),
+    );
+  }
 
   createTask(payload: Task): Observable<Task> {
     return this.http.post<Task>(`${this.apiUrl}/tasks`, payload).pipe(
@@ -186,7 +224,7 @@ export class TaskService {
       }),
     );
   }
-  
+
   updateTask(id: number, payload: Task): Observable<Task> {
     return this.http.put<Task>(`${this.apiUrl}/tasks/${id}`, payload).pipe(
       tap((updatedTask) => {
@@ -211,6 +249,9 @@ export class TaskService {
 
   getUsers(): Observable<User[]> {
     return this.users$;
+  }
+  getAdmin(): Observable<Admin[]> {
+    return this.admins$;
   }
 
   getActivitiesByTask(taskId: number): Observable<Activity[]> {

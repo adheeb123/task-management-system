@@ -6,6 +6,7 @@ export interface Task {
   title: string;
   description: string;
   assignedTo: number;
+  createdBy: number;
   priority: TaskPriority;
   status: TaskStatus;
   startDate: string;

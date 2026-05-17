@@ -12,37 +12,38 @@ import { TaskView } from 'src/app/core/models/task-view.model';
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskListComponent implements OnInit {
   loading = false;
   error = '';
   tasks: TaskView[] = [];
-  columns: TableColumn[] = [
-    { key: 'title', label: 'Task Title', sortable: true },
-    { key: 'assignedUserName', label: 'Assigned To', sortable: true },
-    { key: 'priority', label: 'Priority', sortable: true },
-    { key: 'status', label: 'Status', sortable: true },
-    { key: 'startDate', label: 'Start Date', sortable: true },
-    { key: 'dueDate', label: 'Due Date', sortable: true },
-    { key: 'actions', label: 'Actions' }
-  ];
-
+columns: TableColumn[] = [
+  { key: 'title', label: 'Task Title', sortable: true },
+  { key: 'assignedUserName', label: 'Assigned To', sortable: false },
+  { key: 'createdByName', label: 'Created By', sortable: false },
+  { key: 'priority', label: 'Priority', sortable: true },
+  { key: 'status', label: 'Status', sortable: true },
+  { key: 'startDate', label: 'Start Date', sortable: true },
+  { key: 'dueDate', label: 'Due Date', sortable: true },
+  { key: 'actions', label: 'Actions' }
+];
   vm$ = this.taskService.viewTasks$;
   users$ = this.taskService.users$;
+  admins$ = this.taskService.admins$;
 
   constructor(
     private taskService: TaskService,
-    private router: Router
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
-
     this.loading = true;
     this.error = '';
 
-    this.taskService.loadInitialData()
-      .pipe(finalize(() => this.loading = false))
+    this.taskService
+      .loadInitialData()
+      .pipe(finalize(() => (this.loading = false)))
       .subscribe({
         next: (res) => {
           console.log('Initial data:', res);
@@ -50,7 +51,7 @@ export class TaskListComponent implements OnInit {
         error: (err) => {
           console.error(err);
           this.error = 'Failed to load tasks';
-        }
+        },
       });
   }
 
@@ -64,6 +65,9 @@ export class TaskListComponent implements OnInit {
 
   onAssigneeFilter(value: string): void {
     this.taskService.setAssigneeFilter(value ? +value : null);
+  }
+  onCreatedByFilter(value: string): void {
+    this.taskService.setAdminFilter(value ? +value : null);
   }
 
   onSort(column: string): void {
