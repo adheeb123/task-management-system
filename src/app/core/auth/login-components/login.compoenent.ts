@@ -32,9 +32,9 @@ export class LoginComponent {
     onSubmit() {
         const { username, password } = this.loginForm.value;
 
-        if (username === 'admin' && password === 'admin123') {
-            localStorage.setItem('auth_token', 'static-123');
-            this.router.navigate(['/tasks']); // Move to the protected dashboard
+        const success = this.authService.login(username, password);
+        if (success) {
+            this.router.navigate(['/tasks']);
         } else {
             this.errorMessage = 'Invalid Credentials';
         }

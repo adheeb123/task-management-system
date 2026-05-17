@@ -19,7 +19,6 @@ export class AuthService {
 
   login(username: string, password: string): boolean {
     if (username === 'admin' && password === 'admin123') {
-      localStorage.setItem('auth_token', 'static-token-123');
       this.loggedIn.next(true);
       return true;
     }
